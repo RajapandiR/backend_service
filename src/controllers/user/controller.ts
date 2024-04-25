@@ -1,4 +1,4 @@
-import { Request, Response, UserModel, Utils, Responder, Message } from "../../helpers/path";
+import { Request, Response, UserModel, Utils, Responder, Message, HttpStatus, Jwt } from "../../helpers/path";
 
 class UserController {
     constructor() { }
@@ -11,13 +11,21 @@ class UserController {
         let userData = await UserModel.create(data);
         if (userData) Responder.sendSuccessMessage(Message.userCreated, res)
         else Responder.sendFailureForbiddenMessage(Message.userCreated404, res)
-
     }
 
     getUsers = async (req: Request, res: Response) => {
-        let users = await UserModel.find({});
+        let users = await UserModel.find({}, { password: 0 });
         if (users) Responder.sendSuccessData({ users }, Message.users, res)
         else Responder.sendFailureForbiddenMessage(Message.users404, res)
+    }
+
+    loginUser = async (req: Request, res: Response) => {
+        let data = req.body;
+        let pwd = Utils.createHashPwd(data.password);
+        let user = await UserModel.findOne({ email: data.email, password: pwd });
+        if (!user) return Responder.sendFailureUnAuthMessage(Message.invalid, res);
+        const token = Jwt.issueToken({ userId: user._id });
+        Responder.sendSuccessData({ user: user, token: token }, Message.login, res)
     }
 }
 

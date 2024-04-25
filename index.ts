@@ -1,4 +1,4 @@
-import { UserRouter, express, mongoose } from "./src/helpers/path"
+import { LoginUserRouter, UserRouter, express, mongoose, Middleware } from "./src/helpers/path"
 import cors from "cors";
 import "dotenv/config";
 
@@ -17,7 +17,8 @@ const options: any = {
 };
 mongoose.connect(process.env.DB_URL, options);
 
-app.use("/api/user", UserRouter)
+app.use("/api/user", Middleware.loginMiddleware, UserRouter)
+app.use("/api/user/auth", LoginUserRouter)
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
 })

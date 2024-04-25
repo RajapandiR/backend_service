@@ -12,7 +12,7 @@ interface ResultWithMessage {
 
 class ResponderClass {
     constructor() { }
-    sendFailureMessage =  (message: string, code: number, res: Response) =>{
+    sendFailureMessage = (message: string, code: number, res: Response) => {
         let result: ResultWithMessage = {
             success: false,
             message: message,
@@ -21,7 +21,7 @@ class ResponderClass {
         res.status(code).end(JSON.stringify(result));
     }
 
-    sendFailureData =  (data: any, message: string, code: any, res: any) =>{
+    sendFailureData = (data: any, message: string, code: any, res: any) => {
         let result: ResultWithData = {
             success: false,
             message: message,
@@ -31,7 +31,7 @@ class ResponderClass {
         res.end(JSON.stringify(result));
     }
 
-    sendSuccessMessage =  (message: string, res: Response) =>{
+    sendSuccessMessage = (message: string, res: Response) => {
         let result: ResultWithMessage = {
             success: true,
             message: message,
@@ -40,7 +40,7 @@ class ResponderClass {
         res.end(JSON.stringify(result));
     }
 
-    sendSuccessData =  (data: any, message: string, res: Response) =>{
+    sendSuccessData = (data: any, message: string, res: Response) => {
         let result: ResultWithData = {
             success: true,
             message: message,
@@ -75,6 +75,24 @@ class ResponderClass {
         };
         res.setHeader('content-type', 'application/json');
         res.status(HttpStatus.CONFLICT).end(JSON.stringify(result));
+    }
+
+    sendFailureUnAuthMessage = (message: string, res: Response) => {
+        let result = {
+            success: false,
+            message: message,
+        };
+        res.setHeader('content-type', 'application/json');
+        res.status(HttpStatus.UNAUTHORIZED).end(JSON.stringify(result));
+    }
+
+    sendFailureCodeMessage = (message: string, code: number, res: Response) => {
+        let result: ResultWithMessage = {
+            success: false,
+            message: message,
+        };
+        res.setHeader('content-type', 'application/json');
+        res.status(code).end(JSON.stringify(result));
     }
 
 
