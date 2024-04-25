@@ -6,9 +6,18 @@ class JwtClass {
     }
     verifyToken(payload) {
         return jwt.verify(payload, process.env.TOKEN_SECRET)
+
+        // jwt.verify(payload, process.env.TOKEN_SECRET, (err, user) => {
+        //     if (err) {
+        //         console.log("err", err);
+        //         return null
+        //     }
+        //     else user
+        // })
+
     }
 }
 
-export const Jwt =  new JwtClass();
+export const Jwt = new JwtClass();
 
 
