@@ -17,8 +17,8 @@ const options: any = {
 };
 mongoose.connect(process.env.DB_URL, options);
 
-app.use("/api/user", Middleware.loginMiddleware, UserRouter)
 app.use("/api/user/auth", LoginUserRouter)
+app.use("/api/user", Middleware.loginMiddleware, UserRouter)
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
 })

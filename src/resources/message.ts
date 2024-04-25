@@ -8,7 +8,8 @@ const Message = {
     login: "User login successfull",
     notToken404: "Authorization failed. No access token",
     unAuth: "Unauthorization",
-    token404: "Could not verify token"
+    token404: "Could not verify token",
+    notTokenOrExp404: "Authorization failed. No access token or expired",
 
 }
 

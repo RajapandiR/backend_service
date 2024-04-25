@@ -14,12 +14,16 @@ class UserController {
     }
 
     getUsers = async (req: Request, res: Response) => {
+        console.log("ssss");
+        
         let users = await UserModel.find({}, { password: 0 });
         if (users) Responder.sendSuccessData({ users }, Message.users, res)
         else Responder.sendFailureForbiddenMessage(Message.users404, res)
     }
 
     loginUser = async (req: Request, res: Response) => {
+        console.log("ssss");
+        
         let data = req.body;
         let pwd = Utils.createHashPwd(data.password);
         let user = await UserModel.findOne({ email: data.email, password: pwd });

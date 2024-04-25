@@ -1,20 +1,11 @@
 import jwt from "jsonwebtoken"
 
 class JwtClass {
-    issueToken(payload) {
-        return jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '1d' });
+    issueToken(payload: any) {
+        return jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '2m' });
     }
-    verifyToken(payload) {
+    verifyToken(payload: any) {
         return jwt.verify(payload, process.env.TOKEN_SECRET)
-
-        // jwt.verify(payload, process.env.TOKEN_SECRET, (err, user) => {
-        //     if (err) {
-        //         console.log("err", err);
-        //         return null
-        //     }
-        //     else user
-        // })
-
     }
 }
 
