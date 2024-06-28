@@ -95,6 +95,19 @@ class ResponderClass {
         res.status(code).end(JSON.stringify(result));
     }
 
+    sendPaginateSuccessData = function (data: any, message: string, res: Response, key: string) {
+        let result: ResultWithData = {
+            success: true,
+            message: message,
+            data: {
+                [key]: data.docs,
+                total: data.totalDocs
+            }
+        };
+        res.setHeader('content-type', 'application/json');
+        res.end(JSON.stringify(result));
+    }
+
 
     // sendNoAdmin =  (res: Response) =>{
     //     this.sendFailureMessage(AdminMsg.accNotFound, HttpStatus.NOT_FOUND, res);

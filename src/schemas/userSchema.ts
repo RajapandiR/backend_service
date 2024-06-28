@@ -1,4 +1,4 @@
-import { Schema, Document, mongoose } from "../helpers/path";
+import { Schema, Document, mongoose, mongoosePaginate } from "../helpers/path";
 
 let options = {
     versionKey: false,
@@ -20,7 +20,7 @@ const UserSchema = new Schema<IUser>({
 
 }, options);
 
-
+UserSchema.plugin(mongoosePaginate)
 const UserModel = mongoose.model("user", UserSchema);
 
 export { IUser, UserModel };

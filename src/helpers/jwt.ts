@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 
 class JwtClass {
     issueToken(payload: any) {
-        return jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '2m' });
+        return jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '60m' });
     }
     verifyToken(payload: any) {
         return jwt.verify(payload, process.env.TOKEN_SECRET)

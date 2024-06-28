@@ -1,4 +1,5 @@
-import { LoginUserRouter, UserRouter, express, mongoose, Middleware } from "./src/helpers/path"
+import { LoginUserRouter, UserRouter, express, Middleware } from "./src/helpers/path"
+import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 

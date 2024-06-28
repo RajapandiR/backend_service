@@ -1,6 +1,8 @@
 import { NextFunction } from "express";
 import { Jwt, Message, Request, Responder, Response, UserModel } from "../helpers/path";
 import jwt from "jsonwebtoken"
+
+
 class MiddlewareClass {
     loginMiddleware = async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -8,7 +10,7 @@ class MiddlewareClass {
             const token = req.headers["authorization"].split(' ')[1]
             let { userId, } = await Jwt.verifyToken(token);
             // if (exp > Date.now()) return Responder.sendFailureForbiddenMessage("token expired", res)
-            let user = await UserModel.find({ _id: userId }, { password: 0 });
+            let user = await UserModel.findOne({ _id: userId }, { password: 0 });
             if (!user) return Responder.sendFailureUnAuthMessage(Message.unAuth, res)
             req["user"] = user;
             next()
@@ -18,4 +20,4 @@ class MiddlewareClass {
     }
 }
 
-export const Middleware = new MiddlewareClass();
+export const Middleware = new MiddlewareClass();   
